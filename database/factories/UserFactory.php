@@ -27,10 +27,18 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' => bcrypt('password'),
+            'role' => 'candidat',
         ];
+    }
+    public function recruteur(): static
+    {
+        return $this->state(['role' => 'recruteur']);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(['role' => 'admin']);
     }
 
     /**
