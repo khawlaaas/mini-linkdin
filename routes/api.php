@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\OffreController;
-use App\Http\Controllers\CandidatureController; // 👈 ADD THIS
+use App\Http\Controllers\CandidatureController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login',    [AuthController::class, 'login']);
@@ -34,9 +34,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/offres',        [OffreController::class, 'index']);
     Route::get('/offres/{offre}', [OffreController::class, 'show']);
 
-    Route::middleware('IsRecruteur')->group(function () {
-        Route::post('/offres',           [OffreController::class, 'store']);
-        Route::put('/offres/{offre}',    [OffreController::class, 'update']);
+    Route::middleware('isRecruteur')->group(function () {
+        Route::post('/offres', [OffreController::class, 'store']);
+        Route::put('/offres/{offre}', [OffreController::class, 'update']);
         Route::delete('/offres/{offre}', [OffreController::class, 'destroy']);
 
         Route::get('/offres/{offre}/candidatures',        [CandidatureController::class, 'candidaturesDeLOffre']);
