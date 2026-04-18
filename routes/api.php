@@ -22,16 +22,16 @@ Route::middleware('auth:api')->group(function () {
 
     Route::middleware('isCandidat')->group(function () {
         Route::post('/profil', [ProfilController::class, 'store']);
-        Route::get('/profil', [ProfilController::class, 'show']);
-        Route::put('/profil', [ProfilController::class, 'update']);
-        Route::post('/profil/competences', [ProfilController::class, 'addCompetence']);
+        Route::get('/profil',  [ProfilController::class, 'show']);
+        Route::put('/profil',  [ProfilController::class, 'update']);
+        Route::post('/profil/competences',              [ProfilController::class, 'addCompetence']);
         Route::delete('/profil/competences/{competence}', [ProfilController::class, 'removeCompetence']);
 
         Route::post('/offres/{offre}/candidater', [CandidatureController::class, 'postuler']);
         Route::get('/mes-candidatures',           [CandidatureController::class, 'mesCandidatures']);
     });
 
-    Route::get('/offres', [OffreController::class, 'index']);
+    Route::get('/offres',        [OffreController::class, 'index']);
     Route::get('/offres/{offre}', [OffreController::class, 'show']);
 
     Route::middleware('isRecruteur')->group(function () {
